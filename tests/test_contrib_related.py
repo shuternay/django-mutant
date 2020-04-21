@@ -140,7 +140,7 @@ class ForeignKeyDefinitionTest(RelatedFieldDefinitionTestMixin,
         with app_cache_restorer():
             call_command(
                 'loaddata', 'test_fk_to_loading.json',
-                verbosity=0, commit=False
+                verbosity=0,
             )
         to_model_def = ModelDefinition.objects.get_by_natural_key(
             'tests', 'tomodel'

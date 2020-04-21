@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.migrations.state import ModelState, StateApps
-from django.utils.six import string_types
 from django.utils.translation import ugettext_lazy as _
+from six import string_types
 
 from .. import logger
 from ..compat import get_remote_field_model

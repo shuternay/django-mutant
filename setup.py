@@ -17,12 +17,14 @@ setup(
     install_requires=[
         'django>=1.8',
         'django-picklefield>=0.3.2',
-        'django-polymodels>=1.4.6a3',
+        'django-polymodels @ git+https://github.com/shuternay/django-mutant',
+        'six',
     ],
     packages=find_packages(exclude=['tests', 'tests.*']),
     package_data={
         '': ['locale/*/LC_MESSAGES/*'],
     },
+    test_suite='tests',
     license='MIT License',
     classifiers=[
         'Development Status :: 4 - Beta',

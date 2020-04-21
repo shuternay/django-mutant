@@ -6,9 +6,9 @@ from copy import deepcopy
 from itertools import chain, groupby
 from operator import itemgetter
 
+import six
 from django.apps import AppConfig, apps
 from django.db import connections, models, router
-from django.utils import six
 from django.utils.encoding import force_text
 from django.utils.functional import lazy
 

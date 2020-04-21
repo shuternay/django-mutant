@@ -2,11 +2,11 @@ from __future__ import unicode_literals
 
 import warnings
 
+import six
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured, ValidationError
 from django.db import models
 from django.db.models import signals
-from django.utils import six
 from django.utils.translation import ugettext_lazy as _
 from picklefield.fields import PickledObjectField
 from polymodels.models import BasePolymorphicModel
