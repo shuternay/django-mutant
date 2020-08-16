@@ -17,7 +17,7 @@ from .compat import get_remote_field, get_remote_field_model
 
 def allow_migrate(model):
     for db in connections:
-        if router.allow_migrate(db, model):
+        if router.allow_migrate_model(db, model):
             yield db
 
 
