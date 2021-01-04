@@ -6,16 +6,15 @@ from hashlib import md5
 import django
 from django.apps import apps
 from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import ValidationError
+from django.core.exceptions import FieldDoesNotExist, ValidationError
 from django.db import models
 from django.db.migrations.state import ModelState
 from django.db.models.constants import LOOKUP_SEP
-from django.db.models.fields import FieldDoesNotExist
 from django.utils.translation import ugettext_lazy as _
 from picklefield.fields import PickledObjectField
 
 from ... import logger
-from ...compat import get_opts_label, get_remote_field, get_remote_field_model
+from ...compat import get_model_state_fields_list, get_opts_label, get_remote_field, get_remote_field_model
 from ...db.deletion import CASCADE_MARK_ORIGIN
 from ...db.fields import LazilyTranslatedField, PythonIdentifierField
 from ...db.models import MutableModel
@@ -253,7 +252,7 @@ class ModelDefinition(ContentType):
         }
         return attrs
 
-    def get_state(self):
+    def get_state(self) -> ModelState:
         fields = [
             (field_def.name, field_def.construct()) for field_def in self.fielddefinitions.select_subclasses()
         ]
@@ -267,7 +266,7 @@ class ModelDefinition(ContentType):
 
         identifier = (
             self.pk, self.object_name, state.options, dict(
-                (name, field.deconstruct()) for name, field in state.fields
+                (name, field.deconstruct()) for name, field in get_model_state_fields_list(state)
             ), [
                 MutableModelProxy(base).checksum()
                 if base is not MutableModel and issubclass(base, MutableModel) else base

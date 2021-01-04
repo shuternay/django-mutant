@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 from functools import wraps
 
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import FieldDoesNotExist
 from django.db import connections, models, transaction
-from django.db.models.fields import FieldDoesNotExist
 
 from ..compat import get_remote_field
 from ..state import handler as state_handler

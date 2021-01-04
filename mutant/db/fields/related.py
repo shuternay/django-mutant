@@ -1,9 +1,8 @@
 from __future__ import unicode_literals
 
 import six
-from django.core.exceptions import ImproperlyConfigured
+from django.core.exceptions import FieldDoesNotExist, ImproperlyConfigured
 from django.db.models import fields
-from django.db.models.fields import FieldDoesNotExist
 from django.db.models.signals import class_prepared
 
 from ...compat import get_remote_field_model

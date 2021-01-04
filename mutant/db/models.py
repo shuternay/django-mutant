@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from six import string_types
 
 from .. import logger
-from ..compat import get_remote_field_model
+from ..compat import get_model_state_fields_list, get_remote_field_model
 from ..state import handler as state_handler
 
 
@@ -39,9 +39,9 @@ class MutableModel(models.Model):
         return ModelState.from_model(cls, **kwargs)
 
     @classmethod
-    def get_related_model_states(cls, model_state):
+    def get_related_model_states(cls, model_state: ModelState):
         model_states = {}
-        for _name, field in model_state.fields:
+        for _name, field in get_model_state_fields_list(model_state):
             related_model_reference = get_remote_field_model(field)
             if related_model_reference:
                 related_model = cls._meta.apps.get_model(related_model_reference)
